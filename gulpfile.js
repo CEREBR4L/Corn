@@ -25,7 +25,7 @@ gulp.task('default', function (callback) {
 gulp.task('watch', ['browserSync', 'sass'], function(){
 
 	gulp.watch('app/scss/**/*.scss', ['sass']);
-	gulp.watch('app/*.html', browserSync.reload);
+	gulp.watch('app/**/*.html', browserSync.reload);
 	gulp.watch('app/js/**/*.js', browserSync.reload);
 
 });
@@ -36,7 +36,7 @@ gulp.task('build', function(callback){
 
 		'clean:dist',
 		'sass',
-		['useref', 'images', 'fonts'],
+		['useref', 'templates', 'images', 'fonts'],
 		callback
 
 	)
@@ -71,6 +71,13 @@ gulp.task('useref', function(){
 		.pipe(gulpIf('*.js', uglify()))
 		.pipe(gulpIf('*.css', cssnano()))
 		.pipe(gulp.dest('dist'))
+
+});
+
+gulp.task('templates', function(){
+
+	return gulp.src('app/templates/**/*.html')
+	.pipe(gulp.dest('dist/templates'))
 
 });
 

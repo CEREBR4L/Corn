@@ -1,8 +1,8 @@
-@mixin zero-p-m(){
+@mixin m-p-reset(){
 	margin: 0;
 	padding: 0;
 }
 
 .body{
-	@include zero-p-m();
+	@include m-p-reset();
 }
