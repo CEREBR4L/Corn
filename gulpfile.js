@@ -68,7 +68,7 @@ gulp.task('useref', function(){
 
 	return gulp.src('app/*.html')
 		.pipe(useref())
-		.pipe(gulpIf('*.js', uglify()))
+		.pipe(gulpIf('*.js', uglify({mangle: false})))
 		.pipe(gulpIf('*.css', cssnano()))
 		.pipe(gulp.dest('dist'))
 
