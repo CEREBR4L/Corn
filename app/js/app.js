@@ -8,7 +8,7 @@ app.config(function($routeProvider, $locationProvider){
 			controller: 'home'
 		})
 		.otherwise({
-			redirectTo: '/oops'
+			redirectTo: '/'
 		});
 
 	 $locationProvider.html5Mode(true);

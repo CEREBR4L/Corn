@@ -1,8 +1,114 @@
-@mixin m-p-reset(){
+@import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
+
+@mixin padding-margin-reset(){
 	margin: 0;
 	padding: 0;
 }
 
-.body{
-	@include m-p-reset();
+@mixin set-margin($size){
+	margin: $size;
+}
+
+@mixin set-virtical-margin($size){
+	margin: $size 0;
+}
+
+@mixin set-padding($size){
+	padding: $size;
+}
+
+@mixin set-virtical-padding($size){
+	padding: $size 0;
+}
+
+@mixin set-border-radius($radius){
+	border-radius: $radius;
+}
+
+@mixin set-heading($size, $weight, $opacity){
+	font-size: $size; 
+	font-weight: $weight;
+	opacity: $opacity; 
+}
+
+$primary-color: #723D46;
+$secondard-color: #E26D5C;
+$dark-color: #313638;
+$light-color: #E8E9EB;
+$contrast-color: #6DD3CE;
+
+$fonts: 'Oxygen', sans-serif;
+
+body{
+	@include padding-margin-reset();
+	min-height: 100vh;
+}
+
+.link { text-decoration: none; }
+.link:hover { opacity: 0.7; }
+
+.cont{
+  width: 75%;
+  @include set-margin(0 auto)
+}
+
+.nav{
+	width: 100%;
+	min-height: 70px;
+	height: 10vh; 
+	max-height: 125px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: nowrap;
+	background-color: $secondard-color;
+
+	.nav-text{
+  		display: inline-block;
+  		color: $light-color;
+  		font-family: $fonts;
+  		@include padding-margin-reset()
+  		@include set-heading(1.75em, 300, 1)
+	}	
+
+	.nav-list{
+		display: inline-block;
+		padding: 13px 50px;
+		margin: 0px; 
+	}
+
+	.nav-list-item{
+		display: inline-block;
+		padding: 0px 15px;
+		color: $light-color;
+		font-family: $fonts;
+	}
+
+}
+
+.hero{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $dark-color;
+	height: 90vh;
+	@include padding-margin-reset()
+
+	h1{
+		color: $secondard-color;
+		font-family: $fonts;
+		text-align: center;
+		@include set-heading(2em, 300, 1)
+		@include padding-margin-reset()
+		@include set-virtical-padding(5px)
+	}
+	
+	p{
+		font-family: $fonts;
+		color: $light-color;
+		text-align: center;
+		@include set-heading(1em, 300, 1)
+		@include padding-margin-reset()
+	}
+
 }
