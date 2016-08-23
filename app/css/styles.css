@@ -12,7 +12,18 @@ body {
 
 .cont {
   width: 75%;
-  margin: 0 auto; }
+  margin: 75px auto; }
+  .cont h1 {
+    font-family: "Oxygen", sans-serif;
+    color: #E26D5C;
+    font-size: 1.75em;
+    font-weight: 300;
+    opacity: 1; }
+  .cont p {
+    font-family: "Oxygen", sans-serif;
+    color: #313638;
+    font-size: 1em;
+    padding-left: 5px; }
 
 .nav {
   width: 100%;
