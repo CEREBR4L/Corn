@@ -6,8 +6,9 @@ var cssnano = require('gulp-cssnano');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var gulpIf = require('gulp-if');
+var nodemon = require('gulp-nodemon');
 
-var browserSync = require('browser-sync').create();
+var browserSync = require('browser-sync');
 var del = require('del');
 var runSequence = require('run-sequence');
 
@@ -48,19 +49,16 @@ gulp.task('sass', function(){
 	return gulp.src('app/scss/**/*.scss')
 		.pipe(sass())
 		.pipe(gulp.dest('app/css'))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
 
 });
 
-gulp.task('browserSync', function(){
+gulp.task('browserSync', ['nodemon'], function(){
 
-	browserSync.init({
-		server: {
-			baseDir: 'app'
-		},
-	})
+	browserSync.init(null, {
+		proxy: "http://localhost:8080",
+		files: ["app/**/*.*"],
+		port: 3000,
+	});
 
 });
 
@@ -71,6 +69,25 @@ gulp.task('useref', function(){
 		.pipe(gulpIf('*.js', uglify({mangle: false})))
 		.pipe(gulpIf('*.css', cssnano()))
 		.pipe(gulp.dest('dist'))
+
+});
+
+gulp.task('nodemon', function(cb){
+
+	var started = false;
+
+	nodemon({
+
+		script: 'server.js'
+
+	}).on('start', function(){
+
+		if (!started){
+			cb();
+			started = true; 
+		} 
+
+	});
 
 });
 

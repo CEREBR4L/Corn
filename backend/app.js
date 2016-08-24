@@ -33,6 +33,7 @@ exports.findAll = function(req, res){
 			return;
 		}
 
+		console.log("Got data!");
 		res.json(items);
 
 	});

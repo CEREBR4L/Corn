@@ -16,13 +16,15 @@ app.get('/data', backend.findAll);
 
 
 /* ANGULAR FRONT END */
-app.use('/css/', express.static(__dirname + '/dist/css/'));
-app.use('/js/', express.static(__dirname + '/dist/js/'));
-app.use('/templates/', express.static(__dirname + '/dist/templates/'));
+app.use('/css/', express.static(__dirname + '/app/css/'));
+app.use('/js/', express.static(__dirname + '/app/js/'));
+app.use('/templates/', express.static(__dirname + '/app/templates/'));
 
 app.use('*', function(req, res){
-	res.sendFile(__dirname + '/dist/');
+	res.sendFile(__dirname + '/app/');
 });
+
+
 
 /* Start app and log it */
 app.listen(port, function(){
