@@ -5,8 +5,8 @@
 	</div>
 </div>
 
-<div class="cont">
-	<h1>{{ dataTitle }}</h1>
-	<p>{{ dataBody }}</p>
+<div class="cont" ng-repeat="content in data">
+	<h1>{{ content.title }}</h1>
+	<p>{{ content.text }}</p>
 </div>
 

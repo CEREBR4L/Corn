@@ -8,8 +8,7 @@ angular.module('app')
 
 		getGeneric.getData().then(
 			function(resp){
-				$scope.dataTitle = resp.data[0].title;
-				$scope.dataBody = resp.data[0].text;
+				$scope.data = resp.data;
 			}
 		);
 
