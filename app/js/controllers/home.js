@@ -1,16 +1,13 @@
-angular.module('app')
-	.controller('home', function homeController($scope, getGeneric){
+'use strict';
 
-		$scope.title = "Welcome to Corn";
-		$scope.subTitle = "A MEAN boilerplate for JavaScript apps";
+angular.module('app').controller('home', function homeController($scope, getGeneric) {
 
-		var dataText = getGeneric.getData;
+	$scope.title = "Welcome to Corn";
+	$scope.subTitle = "A MEAN boilerplate for JavaScript apps";
 
-		getGeneric.getData().then(
-			function(resp){
-				$scope.data = resp.data;
-			}
-		);
+	var dataText = getGeneric.getData;
 
+	getGeneric.getData().then(function (resp) {
+		$scope.data = resp.data;
 	});
-
+});

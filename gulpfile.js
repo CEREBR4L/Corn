@@ -7,6 +7,7 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var gulpIf = require('gulp-if');
 var nodemon = require('gulp-nodemon');
+var babel = require('gulp-babel');
 
 var browserSync = require('browser-sync');
 var del = require('del');
@@ -16,14 +17,14 @@ gulp.task('default', function (callback) {
 
 	runSequence(
 
-	['sass','browserSync', 'watch'],
+	['watch'],
 	callback
 
 	)
 
 });
 
-gulp.task('watch', ['browserSync', 'sass'], function(){
+gulp.task('watch', ['browserSync', 'sass', 'babel'], function(){
 
 	gulp.watch('app/scss/**/*.scss', ['sass']);
 	gulp.watch('app/**/*.html', browserSync.reload);
@@ -62,7 +63,7 @@ gulp.task('browserSync', ['nodemon'], function(){
 
 });
 
-gulp.task('useref', function(){
+gulp.task('useref', ['babel'], function(){
 
 	return gulp.src('app/*.html')
 		.pipe(useref())
@@ -71,6 +72,18 @@ gulp.task('useref', function(){
 		.pipe(gulp.dest('dist'))
 
 });
+
+gulp.task('babel', () => 
+
+	gulp.src('app/**/*.js', {base:"./"})
+		.pipe(babel({
+			presets: ['es2015'],
+			sourceMap: true,
+            sourceRoot: 'app'
+		}))
+		.pipe(gulp.dest('.'))
+
+);
 
 gulp.task('nodemon', function(cb){
 
@@ -120,6 +133,12 @@ gulp.task('clean:dist', function(){
 	return del.sync('dist');
 
 });
+
+/*gulp.task('clean:js', function(){
+
+	return del.sync('app/js');
+
+});*/
 
 gulp.task('cache:clear', function(callback){
 

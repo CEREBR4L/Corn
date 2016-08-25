@@ -1,17 +1,15 @@
-angular.module('app')
-	.factory('getGeneric', function($http){
+'use strict';
 
-		return{
+angular.module('app').factory('getGeneric', function ($http) {
 
-			getData: function(){
+	return {
 
-				return $http.get('/data').success(function(data){
-					return data;
-				})
+		getData: function getData() {
 
-			}
-
+			return $http.get('/data').success(function (data) {
+				return data;
+			});
 		}
 
-	});
-
+	};
+});
