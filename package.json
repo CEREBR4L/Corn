@@ -1,7 +1,7 @@
 {
   "name": "corn",
   "version": "0.0.1",
-  "description": "Mah boilerplate kid.",
+  "description": "Mah boilerplate for tha MEAN stack.",
   "main": "index.js",
   "scripts": {
     "gulp": "gulp"
@@ -30,7 +30,8 @@
     "run-sequence": "^1.2.2"
   },
   "dependencies": {
-    "gulp": "^3.9.1",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.9",
     "shortid": "^2.2.6"
   }
 }

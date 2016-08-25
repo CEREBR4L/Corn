@@ -6,7 +6,7 @@ angular.module('app').factory('getGeneric', function ($http) {
 
 		getData: function getData() {
 
-			return $http.get('/data').success(function (data) {
+			return $http.get('/data').success((data) => {
 				return data;
 			});
 		}

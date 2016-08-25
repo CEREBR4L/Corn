@@ -13,22 +13,21 @@ var browserSync = require('browser-sync');
 var del = require('del');
 var runSequence = require('run-sequence');
 
-gulp.task('default', function (callback) {
+gulp.task('default', ['browserSync'], function (callback) {
 
 	runSequence(
-
-	['watch'],
+	'watch',
 	callback
 
 	)
 
 });
 
-gulp.task('watch', ['browserSync', 'sass', 'babel'], function(){
+gulp.task('watch', function(){
 
-	gulp.watch('app/scss/**/*.scss', ['sass']);
-	gulp.watch('app/**/*.html', browserSync.reload);
-	gulp.watch('app/js/**/*.js', browserSync.reload);
+	gulp.watch('app/**/*.*', ['build']);
+	gulp.watch('app/**/*.html', ['bs-delay']);
+	gulp.watch('app/js/**/*.js', ['bs-delay']);
 
 });
 
@@ -37,8 +36,10 @@ gulp.task('build', function(callback){
 	runSequence(
 
 		'clean:dist',
+		'move',
 		'sass',
 		['useref', 'templates', 'images', 'fonts'],
+		['remove-nonmin-js', 'remove-nonmin-css'],
 		callback
 
 	)
@@ -49,7 +50,7 @@ gulp.task('sass', function(){
 
 	return gulp.src('app/scss/**/*.scss')
 		.pipe(sass())
-		.pipe(gulp.dest('app/css'))
+		.pipe(gulp.dest('dist/css'))
 
 });
 
@@ -57,15 +58,20 @@ gulp.task('browserSync', ['nodemon'], function(){
 
 	browserSync.init(null, {
 		proxy: "http://localhost:8080",
-		files: ["app/**/*.*"],
+		files: ["dist/**/*.*"],
 		port: 3000,
 	});
 
 });
 
+gulp.task('move', function(){
+	gulp.src('app/**/*.html')
+	.pipe(gulp.dest('dist'))
+})
+
 gulp.task('useref', ['babel'], function(){
 
-	return gulp.src('app/*.html')
+	return gulp.src('dist/*.html')
 		.pipe(useref())
 		.pipe(gulpIf('*.js', uglify({mangle: false})))
 		.pipe(gulpIf('*.css', cssnano()))
@@ -75,15 +81,29 @@ gulp.task('useref', ['babel'], function(){
 
 gulp.task('babel', () => 
 
-	gulp.src('app/**/*.js', {base:"./"})
+	gulp.src('app/**/*.js')
 		.pipe(babel({
-			presets: ['es2015'],
-			sourceMap: true,
-            sourceRoot: 'app'
+			presets: ['es2015']
 		}))
-		.pipe(gulp.dest('.'))
+		.pipe(gulp.dest('dist'))
 
 );
+
+gulp.task('remove-nonmin-js', function(){
+	gulp.src('dist/js')
+		del.sync(['dist/js/**', '!dist/js', '!dist/js/main.min.js']);
+})
+
+gulp.task('remove-nonmin-css', function(){
+	gulp.src('dist/css')
+		del.sync(['dist/css/**', '!dist/css', '!dist/css/styles.min.css']);
+})
+
+gulp.task('bs-delay', function () {
+  setTimeout(function () {
+    browserSync.reload({ stream: false });
+  }, 1000);
+});
 
 gulp.task('nodemon', function(cb){
 
@@ -98,7 +118,7 @@ gulp.task('nodemon', function(cb){
 		if (!started){
 			cb();
 			started = true; 
-		} 
+		}
 
 	});
 
@@ -133,12 +153,6 @@ gulp.task('clean:dist', function(){
 	return del.sync('dist');
 
 });
-
-/*gulp.task('clean:js', function(){
-
-	return del.sync('app/js');
-
-});*/
 
 gulp.task('cache:clear', function(callback){
 
