@@ -38,7 +38,7 @@ gulp.task('build', function(callback){
 		'clean:dist',
 		'move',
 		'sass',
-		['useref', 'templates', 'images', 'fonts'],
+		['useref', 'templates', 'images', 'fonts', 'json'],
 		['remove-nonmin-js', 'remove-nonmin-css'],
 		callback
 
@@ -145,6 +145,13 @@ gulp.task('fonts', function(){
 
 	return gulp.src('app/fonts/**/*')
 	.pipe(gulp.dest('dist/fonts'))
+
+});
+
+gulp.task('json', function(){
+
+	return gulp.src('app/json/**/*.json')
+	.pipe(gulp.dest('dist/json'))
 
 });
 
