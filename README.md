@@ -2,6 +2,5 @@
 
 A MEAN stack app skeleton with gulp, browserSync and minifying.  
 
-todo:
-- user auth system/user accounts system 
+todo: [Moved to project](https://github.com/CEREBR4L/Corn/projects/1)
 
