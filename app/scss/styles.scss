@@ -49,12 +49,12 @@ body{
 
 .cont{
 	width: 75%;
-	@include set-margin(75px auto)
+	@include set-margin(75px auto);
 
 	h1{
 		font-family: $fonts;
 		color: $secondard-color;
-		@include set-heading(1.75em, 300, 1)
+		@include set-heading(1.75em, 300, 1);
 	}
 
 	p{
@@ -80,8 +80,8 @@ body{
   		display: inline-block;
   		color: $light-color;
   		font-family: $fonts;
-  		@include padding-margin-reset()
-  		@include set-heading(1.75em, 300, 1)
+  		@include padding-margin-reset();
+  		@include set-heading(1.75em, 300, 1);
 	}	
 
 	.nav-list{
@@ -104,25 +104,117 @@ body{
 	justify-content: center;
 	align-items: center;
 	background-color: $dark-color;
-	height: 90vh;
-	@include padding-margin-reset()
+	min-height: 90vh;
+	@include padding-margin-reset();
 
 	h1{
 		color: $secondard-color;
 		font-family: $fonts;
 		text-align: center;
-		@include set-heading(2em, 300, 1)
-		@include padding-margin-reset()
-		@include set-virtical-padding(5px)
+		@include set-heading(2em, 300, 1);
+		@include padding-margin-reset();
+		@include set-virtical-padding(5px);
 	}
 	
 	p{
 		font-family: $fonts;
 		color: $light-color;
 		text-align: center;
-		@include set-heading(1em, 300, 1)
-		@include padding-margin-reset()
+		@include set-heading(1em, 300, 1);
+		@include padding-margin-reset();
 	}
 
 }
+
+.auth-pages{
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 90vh;
+	background-color: $dark-color;
+	@include padding-margin-reset();
+
+	.auth-cont{
+		width: 40%;
+		padding: 10px;
+		background-color: $dark-color;
+	}
+
+	.title{
+		color: $secondard-color;
+		font-family: $fonts;
+		text-align: center;
+		@include set-heading(1.75em, 300, 1);
+	}
+
+	.link{
+  		color: $secondard-color;
+  		font-family: $fonts;
+  		@include padding-margin-reset();
+	}
+
+	.lbl{
+		display: block;
+		text-align: center;
+		color: $light-color;
+  		font-family: $fonts;
+
+		  .required{
+			  font-size: .7em;
+			  color: $secondard-color;
+			  display: block;
+		  }
+	}
+
+	.auth-textbox{
+		display: block;
+		margin: 10px auto;
+		padding: 7px 15px;
+	}
+
+	.para{
+		text-align: center;
+		color: $light-color;
+  		font-family: $fonts;
+  		@include padding-margin-reset();
+	}
+
+	.submit{
+		width: 50%;
+		background-color: $secondard-color;
+		color: $light-color;
+		border: none;
+		padding: 10px 0px;
+		margin: 20px 25%;
+
+		&:hover{
+			opacity: .9;
+			cursor: pointer;
+		}
+
+		&:focus{
+			outline: none;
+		}
+
+		&[disabled]{
+			opacity: .8;
+		}
+
+	}
+
+	.error-block{
+		background-color: $secondard-color;
+		padding: 10px 0;
+		margin-top: 10px;
+	}
+
+	.help-block{
+		font-family: sans-serif;
+		color: $contrast-color;
+		margin: 0;
+	}
+
+}
+
 

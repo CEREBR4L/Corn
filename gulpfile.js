@@ -103,7 +103,7 @@ gulp.task('remove-nonmin-css', function(){
 gulp.task('bs-delay', function () {
   setTimeout(function () {
     browserSync.reload({ stream: false });
-  }, 1000);
+  }, 1500);
 });
 
 gulp.task('nodemon', function(cb){
