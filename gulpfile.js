@@ -28,6 +28,7 @@ gulp.task('watch', function(){
 	gulp.watch('app/**/*.*', ['build']);
 	gulp.watch('app/**/*.html', ['bs-delay']);
 	gulp.watch('app/js/**/*.js', ['bs-delay']);
+	gulp.watch('app/scss/**/*.scss', ['bs-delay']);
 
 });
 

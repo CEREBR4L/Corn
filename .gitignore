@@ -3,3 +3,6 @@ node_modules/*
 dist
 *.sublime*
 *.DS_Store
+.env*
+env/*
+.vscode/

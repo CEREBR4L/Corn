@@ -1,4 +1,4 @@
-var Generic = require('../backend/models/generic.js');
+var Generic = require('./model.js');
 
 exports.generic = function(req, res){
 	res.send("Welcome to the API");
