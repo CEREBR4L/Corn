@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
-var shortid = require('shortid');
+const mongoose = require("mongoose");
+const shortid = require('shortid');
 
-var GenericSchema = new mongoose.Schema({
+const GenericSchema = new mongoose.Schema({
     _id: {
       type: String,
       'default': shortid.generate

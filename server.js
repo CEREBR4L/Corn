@@ -1,23 +1,23 @@
 //EXPRESS
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 // DATABASE
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost:27017/database');
 
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser'); 
-var jwt = require('jsonwebtoken');
-var env = require('node-env-file');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser'); 
+const jwt = require('jsonwebtoken');
+const env = require('node-env-file');
 
 //Includes
-var backend = require('./backend/generic/generic.js');
-var users = require('./backend/users/users.js');
+const backend = require('./backend/generic/generic.js');
+const users = require('./backend/users/users.js');
 
 /* Config */
-var port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 //ENV VARIABLES
 env(__dirname + '/.env');
@@ -36,7 +36,7 @@ app.get('/create', backend.create);
 app.get('/data', backend.findAll);
 
 // PRIVATE API ROUTES
-var authRoutes = express.Router();
+const authRoutes = express.Router();
 
 authRoutes.post('/new', users.newUser);
 authRoutes.post('/authenticate', users.authenticate);
@@ -53,11 +53,11 @@ app.use('/js/', express.static(__dirname + '/dist/js/'));
 app.use('/templates/', express.static(__dirname + '/dist/templates/'));
 
 // GLOBAL REDIRECT
-app.use('*', function(req, res){
+app.use('*', (req, res) => {
 	res.sendFile(__dirname + '/dist/');
 });
 
 /* Start app and log it */
-app.listen(port, function(){
+app.listen(port, () => {
 	console.log("App active and running on: " + port);
 });

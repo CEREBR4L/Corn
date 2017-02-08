@@ -1,17 +1,17 @@
-var Generic = require('./model.js');
+const Generic = require('./model.js');
 
-exports.generic = function(req, res){
+exports.generic = (req, res) => {
 	res.send("Welcome to the API");
 };
 
-exports.create = function(req, res){
+exports.create = (req, res) => {
 	
-	data = new Generic({
+	const data = new Generic({
 		title: "Welcome to the jungle",
 		text: "This is a bit of text about welcoming you to a jungle of some sorts... yeah I have no idea either, really." 
 	});
 
-	data.save(function(err, dataObj){
+	data.save((err, dataObj) => {
 
 		if(err){
 			console.log("Error in 'create': " + err);
@@ -24,9 +24,9 @@ exports.create = function(req, res){
 
 };
 
-exports.findAll = function(req, res){
+exports.findAll = (req, res) => {
 
-	Generic.find({}, function(err, items){
+	Generic.find({}, (err, items) => {
 
 		if(err){
 			console.log("There was an error: " + err);
