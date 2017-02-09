@@ -1,10 +1,10 @@
 
 angular.module('app')
-    .factory('createUser', function ($http) {
+    .factory('createUser', ($http) => {
 
         return {
 
-            postUser: function(user) {
+            postUser: (user) => {
 
                 return $http({
 

@@ -1,12 +1,12 @@
 angular.module('app')
-    .factory('logout', function ($http){
+    .factory('logout', ($http) => {
 
         return {
 
-            getLoggedOut: function() {
+            getLoggedOut: () => {
 
                 return $http.get('/api/auth/logout')
-                    .success(function(data){
+                    .success( (data) => {
                         return data;
                     });
                 

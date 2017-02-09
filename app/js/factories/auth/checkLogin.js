@@ -1,12 +1,12 @@
 angular.module('app')
-    .factory('checkLogin', function ($http){
+    .factory('checkLogin', ($http) => {
 
         return {
 
-            getLoginStatus: function() {
+            getLoginStatus: () => {
 
                 return $http.get('/api/auth/checkLogin')
-                    .success(function(data){
+                    .success( (data) => {
                         return data;
                     });
                 

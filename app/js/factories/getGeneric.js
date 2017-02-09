@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('app').factory('getGeneric', function ($http) {
+angular.module('app').factory('getGeneric', ($http) => {
 
 	return {
 
-		getData: function getData() {
+		getData: () => {
 
 			return $http.get('/data').success((data) => {
 				return data;

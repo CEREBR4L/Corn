@@ -8,27 +8,27 @@ angular.module('app')
 
             console.log("You are being registered now!");
 
-			var user = $.param({
+			const user = $.param({
 				username: $scope.username,
 				password: $scope.password,
 				email: $scope.email
 			});
 
 			createUser.postUser(user)
-				.then(function(data, status, headers, config){
+				.then( (data, status, headers, config) => {
 
 					if(data.data.authenticated){
 
 						console.log('logging in...');
 
-						var login = $.param({
+						const login = $.param({
 							username: $scope.username,
 							password: $scope.password
 						});
 
 						
 						authenticate.login(login)
-							.then(function(data, status, headers, config){
+							.then( (data, status, headers, config) => {
 
 								if(data.data.loggedIn){
 
@@ -42,7 +42,7 @@ angular.module('app')
 								}
 
 							})
-							.catch(function(e){
+							.catch((e) => {
 
 								console.log("There was an error logging user in: " + e);
 
@@ -57,7 +57,7 @@ angular.module('app')
 					}
 
 				})
-				.catch(function(e){
+				.catch( (e) => {
 
 					console.log("There was an error creating your account: " + e);
 

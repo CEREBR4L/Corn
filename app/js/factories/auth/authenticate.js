@@ -1,10 +1,10 @@
 
 angular.module('app')
-    .factory('authenticate', function ($http) {
+    .factory('authenticate', ($http) => {
 
         return {
 
-            login: function(user) {
+            login: (user) => {
 
                 return $http({
 

@@ -2,20 +2,20 @@
 angular.module('app')
 	.controller('login', ['$scope', '$location', '$rootScope', 'authenticate', 'checkLogin', function newController($scope, $location, $rootScope, authenticate, checkLogin){
 
-		$scope.login = function(){
+		$scope.login = () => {
 
 			$scope.hasError = false;
 			$scope.passwordWrong = false;
 
             console.log("Attempting to log you in now..");
 
-			var user = $.param({
+			const user = $.param({
 				username: $scope.username,
 				password: $scope.password
 			});
 
 			authenticate.login(user)
-				.then(function(data, status, headers, config){
+				.then( (data, status, headers, config) => {
 
 					if(data.data.loggedIn){
 
@@ -42,7 +42,7 @@ angular.module('app')
 					}
 
 				})
-				.catch(function(e){
+				.catch( (e) => {
 
 					console.log("There was an error logging user in: " + e);
 

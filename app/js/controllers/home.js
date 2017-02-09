@@ -5,7 +5,7 @@ angular.module('app')
 		$scope.title = "Welcome to Corn";
 		$scope.subTitle = "A MEAN boilerplate for JavaScript apps";
 
-		getGeneric.getData().then((resp) => {
+		getGeneric.getData().then( (resp) => {
 			$scope.data = resp.data;
 		});
 	}]);
