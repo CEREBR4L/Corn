@@ -1,19 +1,19 @@
-const gulp = require('gulp');
-const sass = require('gulp-sass');
-const useref = require('gulp-useref');
-const uglify = require('gulp-uglify');
-const cssnano = require('gulp-cssnano');
-const imagemin = require('gulp-imagemin');
-const cache = require('gulp-cache');
-const gulpIf = require('gulp-if');
-const nodemon = require('gulp-nodemon');
-const babel = require('gulp-babel');
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var useref = require('gulp-useref');
+var uglify = require('gulp-uglify');
+var cssnano = require('gulp-cssnano');
+var imagemin = require('gulp-imagemin');
+var cache = require('gulp-cache');
+var gulpIf = require('gulp-if');
+var nodemon = require('gulp-nodemon');
+var babel = require('gulp-babel');
 
-const browserSync = require('browser-sync');
-const del = require('del');
-const runSequence = require('run-sequence');
+var browserSync = require('browser-sync');
+var del = require('del');
+var runSequence = require('run-sequence');
 
-gulp.task('default', ['browserSync'], (callback) => {
+gulp.task('default', ['browserSync'], function (callback) {
 
 	runSequence(
 	'watch',
@@ -23,7 +23,7 @@ gulp.task('default', ['browserSync'], (callback) => {
 
 });
 
-gulp.task('watch', () => {
+gulp.task('watch', function(){
 
 	gulp.watch('app/**/*.*', ['build']);
 	gulp.watch('app/**/*.html', ['bs-delay']);
@@ -32,7 +32,7 @@ gulp.task('watch', () => {
 
 });
 
-gulp.task('build', (callback) => {
+gulp.task('build', function(callback){
 
 	runSequence(
 
@@ -47,7 +47,7 @@ gulp.task('build', (callback) => {
 
 });
 
-gulp.task('sass', () => {
+gulp.task('sass', function(){
 
 	return gulp.src('app/scss/**/*.scss')
 		.pipe(sass())
@@ -55,7 +55,7 @@ gulp.task('sass', () => {
 
 });
 
-gulp.task('browserSync', ['nodemon'], () => {
+gulp.task('browserSync', ['nodemon'], function(){
 
 	browserSync.init(null, {
 		proxy: "http://localhost:8080",
@@ -65,12 +65,12 @@ gulp.task('browserSync', ['nodemon'], () => {
 
 });
 
-gulp.task('move', () => {
+gulp.task('move', function(){
 	gulp.src('app/**/*.html')
 	.pipe(gulp.dest('dist'))
 })
 
-gulp.task('useref', ['babel'], () => {
+gulp.task('useref', ['babel'], function(){
 
 	return gulp.src('dist/*.html')
 		.pipe(useref())
@@ -80,7 +80,7 @@ gulp.task('useref', ['babel'], () => {
 
 });
 
-gulp.task('babel', () => {
+gulp.task('babel', () => 
 
 	gulp.src('app/**/*.js')
 		.pipe(babel({
@@ -88,33 +88,33 @@ gulp.task('babel', () => {
 		}))
 		.pipe(gulp.dest('dist'))
 
-});
+);
 
-gulp.task('remove-nonmin-js', () => {
+gulp.task('remove-nonmin-js', function(){
 	gulp.src('dist/js')
 		del.sync(['dist/js/**', '!dist/js', '!dist/js/main.min.js']);
 })
 
-gulp.task('remove-nonmin-css', () => {
+gulp.task('remove-nonmin-css', function(){
 	gulp.src('dist/css')
 		del.sync(['dist/css/**', '!dist/css', '!dist/css/styles.min.css']);
 })
 
-gulp.task('bs-delay',  () => {
-  setTimeout( () => {
+gulp.task('bs-delay', function () {
+  setTimeout(function () {
     browserSync.reload({ stream: false });
   }, 1500);
 });
 
-gulp.task('nodemon', (cb) => {
+gulp.task('nodemon', function(cb){
 
-	let started = false;
+	var started = false;
 
 	nodemon({
 
 		script: 'server.js'
 
-	}).on('start', () => {
+	}).on('start', function(){
 
 		if (!started){
 			cb();
@@ -125,14 +125,14 @@ gulp.task('nodemon', (cb) => {
 
 });
 
-gulp.task('templates', () => {
+gulp.task('templates', function(){
 
 	return gulp.src('app/templates/**/*.html')
 	.pipe(gulp.dest('dist/templates'))
 
 });
 
-gulp.task('images', () => {
+gulp.task('images', function(){
 
 	return gulp.src('app/img/**/*.+(png|jpg|svg|gif)')
 	.pipe(cache(imagemin({
@@ -142,27 +142,27 @@ gulp.task('images', () => {
 
 });
 
-gulp.task('fonts', () => {
+gulp.task('fonts', function(){
 
 	return gulp.src('app/fonts/**/*')
 	.pipe(gulp.dest('dist/fonts'))
 
 });
 
-gulp.task('json', () => {
+gulp.task('json', function(){
 
 	return gulp.src('app/json/**/*.json')
 	.pipe(gulp.dest('dist/json'))
 
 });
 
-gulp.task('clean:dist', () => {
+gulp.task('clean:dist', function(){
 
 	return del.sync('dist');
 
 });
 
-gulp.task('cache:clear', (callback) => {
+gulp.task('cache:clear', function(callback){
 
 	return cache.clearAll(callback);
 
